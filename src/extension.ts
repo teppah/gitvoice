@@ -18,6 +18,7 @@ app.get('/', (req: Request, res: Response) => {
   console.log(`origin: ${req.connection.remoteAddress}`);
   console.log(`params: ${req.params}`);
   console.log(`body: ${req.body}`);
+  res.json({ hello: 'world' });
 });
 
 let server: Server | null = null;
