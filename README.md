@@ -1,65 +1,22 @@
-# helpr README
+# Helpr
 
-This is the README for your extension "helpr". After writing up a brief description, we recommend including the following sections.
+In VSCode: Press F5 to run a debug version of the extension
 
-## Features
+Open Command Palette (Ctrl+Shift+P)
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+# Search for commands
 
-For example if there is an image subfolder under your extension project workspace:
+3 commands have been implemented so far
 
-\!\[feature X\]\(images/feature-x.png\)
+### Hello World
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+displays a hello world prompt
 
-## Requirements
+### Start Helpr Server
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+starts to listen for incoming traffic to local machine, port **6969**
+don't worry, server is automatically stopped when VSCode closes
 
-## Extension Settings
+### Stop Helpr Server
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+stops the server
