@@ -12,7 +12,8 @@
   "activationEvents": [
     "onCommand:helpr.helloWorld",
     "onCommand:helpr.startServer",
-    "onCommand:helpr.stopServer"
+    "onCommand:helpr.stopServer",
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -55,6 +56,7 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "simple-git": "^2.31.0"
   }
 }
