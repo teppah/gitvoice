@@ -5,7 +5,8 @@ import * as express from 'express';
 import type { Request, Response } from 'express';
 import * as parser from 'body-parser';
 import { Server } from 'http';
-import { start } from 'repl';
+import { BodyFormat } from './types/format';
+import { gitPull, gitInstance } from './git';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -14,11 +15,23 @@ const app: express.Application = express();
 const port = 6969;
 
 app.use(parser.json());
-app.get('/', (req: Request, res: Response) => {
-  console.log(`origin: ${req.connection.remoteAddress}`);
-  console.log(`params: ${req.params}`);
-  console.log(`body: ${req.body}`);
-  res.json({ hello: 'world' });
+app.get('/', async (req: Request, res: Response) => {
+  let body: BodyFormat = req.body;
+  console.log(`origin: ${JSON.stringify(req.connection.remoteAddress)}`);
+  console.log(`params: ${JSON.stringify(req.params)}`);
+  console.log(`body: ${JSON.stringify(body)}`);
+  // default to git pull for now
+  try {
+    let response = await gitPull();
+    res.json({ status: 'success', response });
+    vscode.window.showInformationMessage(
+      `SUCCESS: ${JSON.stringify(response)}`
+    );
+  } catch (e) {
+    res.json({ status: 'error', error: e });
+    vscode.window.showErrorMessage(`ERROR: ${JSON.stringify(e)}`);
+	}
+	console.log(process.cwd());
 });
 
 let server: Server | null = null;
@@ -42,7 +55,7 @@ export function activate(context: vscode.ExtensionContext) {
     () => {
       if (server === null) {
         server = app.listen(port, () => {
-          vscode.window.showInformationMessage(`SERVER STARTED! port: ${port}`);
+          vscode.window.showInformationMessage(`server started! port: ${port}`);
         });
       } else {
         vscode.window.showInformationMessage(
@@ -70,6 +83,14 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(disposable);
   context.subscriptions.push(startServer);
   context.subscriptions.push(closeServer);
+
+  // with onStartupFinished event specified in package.json, will autorun
+  server = app.listen(port, () => {
+    vscode.window.showInformationMessage(
+      `server started! port: ${port}`,
+      'helpr.stopServer'
+    );
+  });
 }
 
 // this method is called when your extension is deactivated
