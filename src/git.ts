@@ -1,5 +1,5 @@
-import simpleGit, { CommitResult, PushResult, StatusResult } from 'simple-git';
-import type { SimpleGitOptions, SimpleGit, PullResult } from 'simple-git';
+import simpleGit from 'simple-git';
+import type { SimpleGitOptions, SimpleGit, PullResult, CommitResult, PushResult, StatusResult } from 'simple-git';
 import * as vscode from 'vscode';
 
 const options: SimpleGitOptions = {
