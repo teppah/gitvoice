@@ -1,10 +1,17 @@
 import simpleGit from 'simple-git';
-import type { SimpleGitOptions, SimpleGit, PullResult, CommitResult, PushResult, StatusResult } from 'simple-git';
+import type {
+  SimpleGitOptions,
+  SimpleGit,
+  PullResult,
+  CommitResult,
+  PushResult,
+  StatusResult,
+} from 'simple-git';
 import * as vscode from 'vscode';
 
 const options: SimpleGitOptions = {
   // screw deprecation amirite????
-  baseDir: vscode.workspace.rootPath ?? "",
+  baseDir: vscode.workspace.rootPath ?? '',
   binary: 'git',
   maxConcurrentProcesses: 10,
 };
@@ -25,4 +32,8 @@ export async function gitPush(): Promise<PushResult> {
 
 export async function gitStatus(): Promise<StatusResult> {
   return await gitInstance.status();
+}
+
+export async function gitAddAll(): Promise<void> {
+  await gitInstance.add('.');
 }
