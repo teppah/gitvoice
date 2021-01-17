@@ -6,7 +6,7 @@ import type { Request, Response } from 'express';
 import * as parser from 'body-parser';
 import { Server } from 'http';
 import { BodyFormat } from './types/format';
-import { gitPull, gitInstance } from './git';
+import { gitPull, gitInstance, gitCommit, gitPush, gitStatus } from './git';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -33,6 +33,45 @@ app.get('/', async (req: Request, res: Response) => {
 	}
 	console.log(process.cwd());
 });
+
+app.post('/commitall', async (req:Request, res:Response) => {
+  try {
+    let response = await gitCommit(req.body.message);
+    res.json({ status: 'success', response });
+    vscode.window.showInformationMessage(
+      `All files committed: ${JSON.stringify(response)}`
+    );
+  } catch (error) {
+    res.json({ status: 'error', error: error });
+    vscode.window.showErrorMessage(`Error committing files: ${JSON.stringify(error)}`);
+  }
+})
+
+app.post('/push', async (req:Request, res:Response) => {
+  try {
+    let response = await gitPush();
+    res.json({ status: 'success', response });
+    vscode.window.showInformationMessage(
+      `All files committed: ${JSON.stringify(response)}`
+    );
+  } catch (error) {
+    res.json({ status: 'error', error: error });
+    vscode.window.showErrorMessage(`Error committing files: ${JSON.stringify(error)}`);
+  }
+})
+
+app.post('/status', async (req:Request, res:Response) => {
+  try {
+    let response = await gitStatus();
+    res.json({ status: 'success', response });
+    vscode.window.showInformationMessage(
+      `All files committed: ${JSON.stringify(response)}`
+    );
+  } catch (error) {
+    res.json({ status: 'error', error: error });
+    vscode.window.showErrorMessage(`Error committing files: ${JSON.stringify(error)}`);
+  }
+})
 
 let server: Server | null = null;
 export function activate(context: vscode.ExtensionContext) {
