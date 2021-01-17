@@ -1,6 +1,7 @@
+![Git voice logo](logo.png)
 # Git Voice
 
-![Git voice logo](image.png)
+![Git voice pitch](image.png)
 
 A smart, Google Asssistant-powered VS Code extension that provides an intuitive voice interface
 for your Git workflows.
