@@ -47,7 +47,8 @@ app.post('/commitall', async (req: Request, res: Response) => {
   try {
     let message = "No Message";
     if (req.body.message) {
-      message = req.body.message
+      console.log(req.body.message);
+      message = req.body.message;
     }
     let response = await gitCommit(message);
     res.json({ status: 'success', response });
