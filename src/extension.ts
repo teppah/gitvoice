@@ -15,7 +15,7 @@ const app: express.Application = express();
 const port = 6969;
 
 app.use(parser.json());
-app.get('/', async (req: Request, res: Response) => {
+app.post('/pull', async (req: Request, res: Response) => {
   let body: BodyFormat = req.body;
   console.log(`origin: ${JSON.stringify(req.connection.remoteAddress)}`);
   console.log(`params: ${JSON.stringify(req.params)}`);
