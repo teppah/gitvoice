@@ -159,6 +159,7 @@ export function activate(context: vscode.ExtensionContext) {
           'Server not started yet. Run: command palette: "helpr.startServer"'
         );
       } else {
+        ngrok.disconnect();
         server.close();
         server = null;
         vscode.window.showInformationMessage('Server stopped.');
