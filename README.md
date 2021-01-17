@@ -25,4 +25,5 @@ stops the server
 
 For now, sending a request to [local ip]:6969 defaults to sending a `git pull` command in whatever folder is open in VSCode.
 Will be able to configure this behavior via the HTTP request body that is sent. check the typing
+
 Reference: [src/types/format.ts]()
