@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import * as express from 'express';
+const ngrok = require('ngrok');
 import type { Request, Response } from 'express';
 import * as parser from 'body-parser';
 import { Server } from 'http';
@@ -170,9 +171,11 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(closeServer);
 
   // with onStartupFinished event specified in package.json, will autorun
-  server = app.listen(port, () => {
+  server = app.listen(port, async () => {
+    const url = await ngrok.connect(port);
+    console.log(url);
     vscode.window.showInformationMessage(
-      `server started! port: ${port}`,
+      `server started! port: ${port}, link: ${url}`,
       'helpr.stopServer'
     );
   });
