@@ -13,6 +13,7 @@ import {
   gitPush,
   gitStatus,
   gitAddAll,
+  gitCheckOut,
 } from './git';
 
 // this method is called when your extension is activated
@@ -43,7 +44,11 @@ app.post('/pull', async (req: Request, res: Response) => {
 
 app.post('/commitall', async (req: Request, res: Response) => {
   try {
-    let response = await gitCommit(req.body.message);
+    let message = "No Message";
+    if (req.body.message) {
+      message = req.body.message
+    }
+    let response = await gitCommit(message);
     res.json({ status: 'success', response });
     vscode.window.showInformationMessage(
       `All files committed: ${JSON.stringify(response)}`
@@ -60,11 +65,11 @@ app.post('/addall', async (req: Request, res: Response) => {
   try {
     await gitAddAll();
     res.json({ status: 'success' });
-    vscode.window.showInformationMessage(`All files committed`);
+    vscode.window.showInformationMessage(`All files added`);
   } catch (error) {
     res.json({ status: 'error', error: error });
     vscode.window.showErrorMessage(
-      `Error committing files: ${JSON.stringify(error)}`
+      `Error adding files: ${JSON.stringify(error)}`
     );
   }
 });
@@ -74,12 +79,12 @@ app.post('/push', async (req: Request, res: Response) => {
     let response = await gitPush();
     res.json({ status: 'success', response });
     vscode.window.showInformationMessage(
-      `All files committed: ${JSON.stringify(response)}`
+      `Push successful: ${JSON.stringify(response)}`
     );
   } catch (error) {
     res.json({ status: 'error', error: error });
     vscode.window.showErrorMessage(
-      `Error committing files: ${JSON.stringify(error)}`
+      `Error pushing: ${JSON.stringify(error)}`
     );
   }
 });
@@ -89,12 +94,27 @@ app.post('/status', async (req: Request, res: Response) => {
     let response = await gitStatus();
     res.json({ status: 'success', response });
     vscode.window.showInformationMessage(
-      `All files committed: ${JSON.stringify(response)}`
+      `Git status: ${JSON.stringify(response)}`
     );
   } catch (error) {
     res.json({ status: 'error', error: error });
     vscode.window.showErrorMessage(
-      `Error committing files: ${JSON.stringify(error)}`
+      `Error retrieving status: ${JSON.stringify(error)}`
+    );
+  }
+});
+
+app.post('/checkout', async (req: Request, res: Response) => {
+  try {
+    let response = await gitCheckOut();
+    res.json({ status: 'success', response });
+    vscode.window.showInformationMessage(
+      `Checkout success: ${JSON.stringify(response)}`
+    );
+  } catch (error) {
+    res.json({ status: 'error', error: error });
+    vscode.window.showErrorMessage(
+      `Checkout failed: ${JSON.stringify(error)}`
     );
   }
 });

@@ -37,3 +37,7 @@ export async function gitStatus(): Promise<StatusResult> {
 export async function gitAddAll(): Promise<void> {
   await gitInstance.add('.');
 }
+
+export async function gitCheckOut(): Promise<void> {
+  await gitInstance.checkout();
+}
