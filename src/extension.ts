@@ -49,7 +49,7 @@ app.post('/commitall', async (req:Request, res:Response) => {
 
 app.post('/push', async (req:Request, res:Response) => {
   try {
-    let response = await gitPush(req.body.message);
+    let response = await gitPush();
     res.json({ status: 'success', response });
     vscode.window.showInformationMessage(
       `All files committed: ${JSON.stringify(response)}`

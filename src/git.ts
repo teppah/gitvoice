@@ -19,8 +19,8 @@ export async function gitCommit(message: string): Promise<CommitResult> {
   return await gitInstance.commit(message); //committing all changes in directory
 }
 
-export async function gitPush(message: string): Promise<PushResult> {
-  return await gitInstance.push(message);
+export async function gitPush(): Promise<PushResult> {
+  return await gitInstance.push();
 }
 
 export async function gitStatus(): Promise<StatusResult> {
