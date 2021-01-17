@@ -5,7 +5,7 @@ import * as express from 'express';
 const ngrok = require('ngrok');
 import type { Request, Response } from 'express';
 import * as parser from 'body-parser';
-import { Server } from 'http';
+import { Server, STATUS_CODES } from 'http';
 import { BodyFormat } from './types/format';
 import {
   gitPull,
@@ -172,7 +172,11 @@ export function activate(context: vscode.ExtensionContext) {
 
   // with onStartupFinished event specified in package.json, will autorun
   server = app.listen(port, async () => {
-    const url = await ngrok.connect(port);
+    const url = await ngrok.connect({
+        addr: port,
+        subdomain: 'static',
+        authtoken: '1QIzm1rKPcH0Y6BF94wlXqcCuCq_5rwrY69TF3MYHbvmUtJ2E'
+      });
     console.log(url);
     vscode.window.showInformationMessage(
       `server started! port: ${port}, link: ${url}`,
