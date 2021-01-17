@@ -1,6 +1,6 @@
 # Helpr
 
-In VSCode: Press F5 to run a debug version of the extension
+In VSCode: Press F5 to run a debug version of the extension.
 
 Open Command Palette (Ctrl+Shift+P)
 
