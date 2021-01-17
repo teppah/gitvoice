@@ -1,4 +1,4 @@
-import simpleGit from 'simple-git';
+import simpleGit, { CommitResult, PushResult, StatusResult } from 'simple-git';
 import type { SimpleGitOptions, SimpleGit, PullResult } from 'simple-git';
 import * as vscode from 'vscode';
 
@@ -13,4 +13,16 @@ export const gitInstance: SimpleGit = simpleGit(options);
 
 export async function gitPull(): Promise<PullResult> {
   return await gitInstance.pull();
+}
+
+export async function gitCommit(message: string): Promise<CommitResult> {
+  return await gitInstance.commit(message); //committing all changes in directory
+}
+
+export async function gitPush(message: string): Promise<PushResult> {
+  return await gitInstance.push(message);
+}
+
+export async function gitStatus(): Promise<StatusResult> {
+  return await gitInstance.status();
 }
