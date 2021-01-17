@@ -1,29 +1,10 @@
-# Helpr
+# Git Voice
 
-In VSCode: Press F5 to run a debug version of the extension.
+![Git voice logo](image.png)
 
-Open Command Palette (Ctrl+Shift+P)
+A smart, Google Asssistant-powered VS Code extension that provides an intuitive voice interface
+for your Git workflows.
 
-# Search for commands
+## Getting started
 
-3 commands have been implemented so far
-
-### Hello World
-
-displays a hello world prompt
-
-### Start Helpr Server
-
-starts to listen for incoming traffic to local machine, port **6969**
-don't worry, server is automatically stopped when VSCode closes
-
-### Stop Helpr Server
-
-stops the server
-
-# when you send a request to port 6969
-
-For now, sending a request to [local ip]:6969 defaults to sending a `git pull` command in whatever folder is open in VSCode.
-Will be able to configure this behavior via the HTTP request body that is sent. check the typing
-
-Reference: [src/types/format.ts]()
+View our Devpost [here](https://devpost.com/software/helpr-n9gu0i).
